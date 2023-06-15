@@ -1,0 +1,51 @@
+// Colors
+
+$color-white: hsl(0, 0%, 100%);
+
+$color-gray: hsl(0, 0%, 83%);
+$color-gray-lighter: hsl(0, 0%, 92%);
+$color-gray-darker: hsl(0, 0%, 60%);
+$color-gray-darker-opacity-05: hsl(0, 0%, 60%, 0.5);
+
+$color-black: hsl(0, 0%, 0%);
+$color-black-lighter: hsl(0, 0%, 25%);
+
+$color-purple: hsl(300, 100%, 25%);
+
+$color-font-light: hsl(0, 0%, 40%);
+$color-error: hsl(348, 83%, 47%);
+$color-green: hsl(120, 100%, 25%);
+// Transition
+
+$transition-02: all 0.2s ease;
+$transition-03: all 0.3s ease;
+$transition-04: all 0.4s ease;
+
+// Box-shadow
+
+$bs-c-black-04: hsl(0, 0%, 0%, 0.4);
+$bs-c-black-09: hsl(0, 0%, 0%, 0.9);
+$box-shadow-5: 0 0 5px $bs-c-black-04;
+$box-shadow-10: 0 0 10px 1px hsl(0, 0%, 0%, 0.2);
+
+// Outline
+
+$outline-purple: 2px solid $color-purple;
+
+// Border
+
+$bc-grayopacity-05: $color-gray-darker-opacity-05;
+$bw-05: 0.5px;
+$bw-1: 1px;
+
+// Font
+
+$font-josefin: 'Josefin Sans', sans-serif;
+
+// Modal
+
+$modal-bg-light: hsl(0, 0%, 100%, 0.6);
+
+// Margin
+
+$margin-admin: 4vw 2vw;

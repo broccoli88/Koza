@@ -1,0 +1,36 @@
+{
+  "wm": {
+    "system": "Warmachine & Hordes",
+    "abbr": "wm",
+    "fraction": {
+      "cygnar": {
+        "title": "Cygnar",
+        "images": [
+          { "img": "public/images/gallery/cygnar/c1-a.webp", "name": "ludek1" },
+          { "img": "public/images/gallery/cygnar/c2-a.webp", "name": "ludek2" },
+          { "img": "public/images/gallery/cygnar/c3-a.webp", "name": "ludek3" },
+          { "img": "public/images/gallery/cygnar/c4-a.webp", "name": "ludek4" },
+          { "img": "public/images/gallery/cygnar/c5-a.webp", "name": "ludek5" },
+          { "img": "public/images/gallery/cygnar/c6-a.webp", "name": "ludek6" }
+        ]
+      }
+    }
+  },
+  "wh40k": {
+    "system": "Warhammer 40k",
+    "abbr": "wh40k",
+    "fraction": {
+      "sm": {
+        "title": "Space Marines",
+        "images": [
+          { "img": "/images/gallery/PoM/f10-a.webp", "name": "ludek1" },
+          { "img": "/images/gallery/PoM/f17-b.webp", "name": "ludek2" },
+          { "img": "/images/gallery/PoM/f18-a.webp", "name": "ludek3" },
+          { "img": "/images/gallery/PoM/f23-c.webp", "name": "ludek4" },
+          { "img": "/images/gallery/PoM/f24-a.webp", "name": "ludek5" },
+          { "img": "/images/gallery/PoM/f31-a.webp", "name": "ludek6" }
+        ]
+      }
+    }
+  }
+}

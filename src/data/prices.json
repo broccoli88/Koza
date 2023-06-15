@@ -1,0 +1,51 @@
+{
+  "prices": {
+    "smallBase": {
+      "level-1": 8,
+      "level-2": 15,
+      "level-3": 25
+    },
+
+    "mediumBase": {
+      "level-1": 30,
+      "level-2": 40,
+      "level-3": 65
+    },
+
+    "larageBase": {
+      "level-1": 40,
+      "level-2": 60,
+      "level-3": 100
+    },
+
+    "hugeBase": {
+      "level-1": 80,
+      "level-2": 150,
+      "level-3": 210
+    }
+  },
+
+  "sizes": {
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "huge": "Huge"
+  },
+  "levels": {
+    "lvl1": {
+      "short": "Lvl1",
+      "title": "Level 1",
+      "text": "Low budget and short time – perfect for massive infantry armies. Your miniatures will get rich colors – two to three primary colors and all important details painted, as well as assembling and basing."
+    },
+    "lvl2": {
+      "short": "Lvl1",
+      "title": "Level 2",
+      "text": "Best balance between cost, quality and time. Armies painted at this level will surely stand out and bring lots of attention. By adding extra layers, special effects like weathering, OSL, NMM, some simple freehands and conversions (to avoid clones)."
+    },
+    "lvl3": {
+      "short": "Lvl1",
+      "title": "Level 3",
+      "text": "  Higher cost and time rquired but proportionally high quality and guarantee your models with strongly stand out among the others."
+    }
+  }
+}

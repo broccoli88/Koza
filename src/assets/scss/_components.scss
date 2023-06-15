@@ -1,0 +1,377 @@
+//  ...::: [ BUTTON ] :::...
+
+@mixin btn {
+  align-self: center;
+  background: none;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-block;
+  isolation: isolate;
+  justify-self: center;
+  outline: none;
+  position: relative;
+  text-transform: uppercase;
+  transition: $transition-04;
+  overflow: hidden;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+// Icon Button
+
+@mixin btn-icon-black {
+  &:hover {
+    .btn--icon-content {
+      svg {
+        g {
+          stroke: $color-black;
+        }
+        path {
+          stroke: $color-black;
+        }
+      }
+    }
+  }
+}
+
+@mixin btn-icon-white {
+  &:hover {
+    svg {
+      g {
+        stroke: $color-white;
+      }
+      path {
+        stroke: $color-white;
+      }
+    }
+  }
+}
+
+@mixin btn-icon-content {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  p {
+    order: 2;
+  }
+
+  svg {
+    order: 1;
+    width: clamp(1.5rem, 0.7rem + 1vw, 1.8rem);
+    height: 100%;
+
+    g {
+      transition: $transition-04;
+    }
+    path {
+      transition: $transition-04;
+    }
+  }
+}
+
+// Button Sizes
+
+// Small
+
+@mixin btn--small {
+  @include btn;
+  font-weight: 500;
+  font-size: clamp(1rem, 1rem + 0.5vw, 1.5rem);
+  padding: 0.5em 1em 0.3em;
+
+  @content;
+}
+
+// Medium
+
+@mixin btn--medium {
+  @include btn;
+  font-weight: 600;
+  padding: 0.6em 2em 0.4em;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.9rem);
+
+  @content;
+}
+
+// Large
+
+@mixin btn--large {
+  @include btn;
+  font-weight: 700;
+
+  padding: 0.9em 2.5em 0.8em;
+  font-size: clamp(1.4rem, 1rem + 1vw, 2.2rem);
+
+  @content;
+}
+
+// Button Styles
+
+// Button Gray
+
+@mixin btn--gray {
+  color: $color-black-lighter;
+  background-color: $color-gray-lighter;
+  @content;
+}
+
+// Button White
+
+@mixin btn--white {
+  color: $color-black;
+  background-color: $color-white;
+  @content;
+}
+
+// Button Black
+
+@mixin btn--black {
+  color: $color-white;
+  background-color: $color-black;
+  @content;
+}
+// Button Outline
+
+@mixin btn--outline-white {
+  border: 1px solid $color-white;
+  color: $color-white;
+  @content;
+}
+
+@mixin btn--outline-black {
+  border: 1px solid $color-black;
+  color: $color-black;
+  @content;
+}
+
+@mixin btn--outline-green {
+  border: 1px solid $color-green;
+  color: $color-green;
+  @content;
+}
+
+@mixin btn--outline-red {
+  border: 1px solid $color-error;
+  color: $color-error;
+  @content;
+}
+
+// Button Effects
+
+@mixin btn--fill-in {
+  &:hover {
+    box-shadow: inset 0 0 0 2em black;
+    color: white;
+
+    @content;
+  }
+}
+
+@mixin btn-slide {
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    z-index: -1;
+
+    transition: $transition-04;
+  }
+
+  &:hover::before,
+  &:focus::before {
+    width: 100%;
+  }
+}
+
+// Slide Black
+
+@mixin btn--slide-black {
+  @include btn-slide;
+  &::before {
+    background-color: $color-black;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-white;
+    @content;
+  }
+}
+
+// Slide White
+
+@mixin btn--slide-white {
+  @include btn-slide;
+  &::before {
+    background-color: $color-white;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-black;
+    @content;
+  }
+}
+
+// Slide Green
+
+@mixin btn--slide-green {
+  @include btn-slide;
+
+  &::before {
+    background-color: $color-green;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-white;
+    @content;
+  }
+}
+// Slide Red
+
+@mixin btn--slide-red {
+  @include btn-slide;
+  &::before {
+    background-color: $color-error;
+  }
+
+  &:hover,
+  &:focus {
+    color: $color-white;
+    @content;
+  }
+}
+
+// Scale Butons
+
+@mixin scale-button {
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+
+  &:active {
+    opacity: 0.7;
+    scale: 0.9;
+  }
+}
+
+//  ...::: [ FORM ] :::...
+
+@mixin error {
+  order: 3;
+  grid-column: 1 / -1;
+  font-size: clamp(1.3rem, 0.5rem + 0.8vw, 1.6rem);
+  color: $color-error;
+}
+
+@mixin form {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+
+  @include breakpoint {
+    gap: 1.5vw;
+    margin-top: 1.5vw;
+  }
+}
+
+@mixin form-section {
+  display: grid;
+  border-radius: 4px;
+
+  & > label {
+    transition: $transition-03;
+  }
+
+  & > p {
+    @include error;
+  }
+}
+
+@mixin form-input {
+  font-size: clamp(1.5rem, 1rem + 0.7vw, 2.2rem);
+  font-family: $font-josefin;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: $color-font-light;
+  padding: 0.6em 1em 0.5em;
+
+  border: 1px solid $color-gray-lighter;
+
+  border-radius: 4px;
+  outline: none;
+  order: 2;
+  transition: $transition-03;
+
+  &::placeholder {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    border: 1px solid $color-black;
+    color: $color-black;
+  }
+
+  &:focus + label {
+    color: black;
+  }
+}
+
+//  ...::: [ MODAL ] :::...
+
+@mixin modal-container {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  margin-inline: 1.5rem;
+  font-family: 'Josefin Sans', sans-serif;
+  line-height: 1.6;
+
+  display: grid;
+  place-content: center;
+
+  background-color: $modal-bg-light;
+
+  @content;
+}
+
+@mixin modal($min-width: 70ch) {
+  width: min($min-width, 80vw);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  border: $bw-05 solid $bc-grayopacity-05;
+  border-radius: 5px;
+  box-shadow: $box-shadow-5;
+  background-color: $color-white;
+
+  padding: 2rem;
+  margin-inline: auto;
+
+  @content;
+}
+
+@mixin modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color-gray-lighter;
+}
+@mixin modal-description {
+  margin-block: 3rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-bottom: 1px solid $color-gray-lighter;
+  font-size: clamp(1.5rem, 1rem + 0.7vw, 2.2rem);
+  @content;
+}
