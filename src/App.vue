@@ -18,12 +18,12 @@ adminStore.getSystems()
 const showAdminLogin = ref(false)
 
 onMounted(() => {
-  window.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === 'k') {
-      showAdminLogin.value = !showAdminLogin.value
-    }
-  })
-  loginStore.fetchUser()
+      window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'k') {
+                  showAdminLogin.value = !showAdminLogin.value
+            }
+      })
+      loginStore.fetchUser()
 })
 
 const route = useRoute()
@@ -31,47 +31,47 @@ const adminGalleryStore = useAdminGalleryStore()
 const { isInAdminPanel } = storeToRefs(adminGalleryStore)
 
 const currentRoute = computed(() => {
-  return route.fullPath.includes('/admin-login') || route.fullPath.includes('/admin-panel')
-    ? true
-    : false
+      return route.fullPath.includes('/admin-login') || route.fullPath.includes('/admin-panel')
+            ? true
+            : false
 })
 
 watch(
-  () => route.fullPath,
-  () => {
-    if (route.fullPath === '/admin-panel/manage-gallery') {
-      isInAdminPanel.value = true
-    } else {
-      isInAdminPanel.value = false
-    }
-  }
+      () => route.fullPath,
+      () => {
+            if (route.fullPath === '/admin-panel/manage-gallery') {
+                  isInAdminPanel.value = true
+            } else {
+                  isInAdminPanel.value = false
+            }
+      }
 )
 </script>
 <template>
-  <FadeTransition>
-    <Navbar ref="navbar" v-if="!currentRoute" />
-  </FadeTransition>
-  <RouterView v-slot="{ Component }">
-    <FadeTransition>
-      <component :is="Component" />
-    </FadeTransition>
-  </RouterView>
-  <FadeTransition>
-    <FooTer v-if="!currentRoute" :admin-login="showAdminLogin" />
-  </FadeTransition>
+      <FadeTransition>
+            <Navbar ref="navbar" v-if="!currentRoute" />
+      </FadeTransition>
+      <RouterView v-slot="{ Component }">
+            <FadeTransition>
+                  <component :is="Component" />
+            </FadeTransition>
+      </RouterView>
+      <FadeTransition>
+            <FooTer v-if="!currentRoute" :admin-login="showAdminLogin" />
+      </FadeTransition>
 </template>
 
 <style lang="scss" scoped>
 .fade-enter-from {
-  opacity: 0;
+      opacity: 0;
 }
 
 .fade-leave-to {
-  opacity: 0;
+      opacity: 0;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: $transition-04;
+      transition: $transition-04;
 }
 </style>

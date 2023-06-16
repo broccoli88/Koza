@@ -45,7 +45,7 @@ const handleIntersection = (entries, observer) => {
                               {
                                     opacity: 1,
                                     duration: 1,
-                                    stagger: 0.007
+                                    stagger: 0.004
                               },
                               'heading-=0.1'
                         )
@@ -117,6 +117,7 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
 
       .section__img {
             @include img;
+            filter: grayscale(1);
       }
 
       .section__description {
@@ -127,6 +128,7 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
                   white-space: pre-wrap;
                   line-height: 1.1;
                   position: relative;
+                  margin-bottom: 1rem;
             }
             .underline {
                   position: absolute;

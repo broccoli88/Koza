@@ -25,7 +25,6 @@ const handleIntersection = (entries, observer) => {
                   const underline = section.querySelectorAll('.underline')
                   const button = section.querySelector('.btn')
 
-                  console.log(fluffWords)
                   tl.fromTo(
                         headingWords,
 
@@ -62,7 +61,7 @@ const handleIntersection = (entries, observer) => {
                               {
                                     opacity: 1,
                                     duration: 1,
-                                    stagger: 0.007
+                                    stagger: 0.004
                               },
                               'fluff<'
                         )
@@ -101,6 +100,19 @@ onMounted(() => {
       })
 
       const sections = document.querySelectorAll('.single-col__description')
+      const headingWords = document.querySelectorAll('.single-col__heading .char')
+      const fluffWords = document.querySelectorAll('.single-col__fluff .char')
+      const textWords = document.querySelectorAll('.text-char .char')
+
+      headingWords.forEach((word) => {
+            word.style.opacity = '0'
+      })
+      fluffWords.forEach((word) => {
+            word.style.opacity = '0'
+      })
+      textWords.forEach((word) => {
+            word.style.opacity = '0'
+      })
 
       sections.forEach((el) => {
             textObserver.observe(el)
@@ -165,19 +177,14 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
             @include mask;
       }
 
-      .fluff-char,
-      .heading-char {
-            @include char;
-            opacity: 0;
-      }
-
       .text-char {
             font-kerning: none;
       }
 
       .single-col__fluff {
+            margin-block: 2rem 1.5vw;
             @include breakpoint {
-                  margin-bottom: 1.5vw;
+                  margin-block: 2rem 1.5vw;
                   white-space: pre-wrap;
             }
       }
