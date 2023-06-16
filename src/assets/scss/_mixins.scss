@@ -1,108 +1,120 @@
 // Breakpoints
 
 @mixin breakpoint($bp: 768px) {
-  @media (min-width: $bp) {
-    @content;
-  }
+      @media (min-width: $bp) {
+            @content;
+      }
 }
 
 // Container
 
 @mixin container {
-  width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  margin-bottom: 5vw;
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      margin-bottom: 5vw;
 
-  @content;
+      @content;
 }
 
 // Sections
 
 @mixin section-single-col {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: grid;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
 
-  @include breakpoint {
-    height: 100vh;
-    height: 100dvh;
-  }
+      @include breakpoint {
+            height: 100vh;
+            height: 100dvh;
+      }
 
-  @content;
+      @content;
 }
 
 @mixin section-double-col {
-  @include section-single-col;
+      @include section-single-col;
 
-  @include breakpoint {
-    grid-template-columns: 1fr 35%;
-    grid-template-rows: 100vh;
-    grid-template-rows: 100dvh;
-  }
+      @include breakpoint {
+            grid-template-columns: 1fr 35%;
+            grid-template-rows: 100vh;
+            grid-template-rows: 100dvh;
+      }
 
-  @content;
+      @content;
 }
 
 // Desscription
 
 @mixin description($gap: 1vw, $width: 50ch) {
-  width: min($width, 80%);
-  margin: 2rem auto;
-  text-align: center;
+      width: min($width, 80%);
+      margin: 2rem auto;
+      text-align: center;
 
-  display: grid;
-  place-content: center;
-  gap: $gap;
+      display: grid;
+      place-content: center;
+      gap: $gap;
 
-  @content;
+      @content;
 }
 
 // Image
 
 @mixin img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
 }
 
 // Heading-underline
 
 @mixin heading-underline-purple {
-  position: relative;
-  margin-bottom: 1rem;
+      position: relative;
+      margin-bottom: 1rem;
 
-  &::before {
-    content: '';
-    background-color: $color-purple;
+      &::before {
+            content: '';
+            background-color: $color-purple;
 
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    width: min(30%, 80px);
-    height: 3px;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: min(30%, 80px);
+            height: 3px;
 
-    transform: translateX(-50%);
-  }
+            transform: translateX(-50%);
+      }
 }
 
 @mixin heading-underline-black {
-  color: $color-font-light;
-  position: relative;
-  transition: $transition-04;
+      color: $color-font-light;
+      position: relative;
+      transition: $transition-04;
 
-  &::before {
-    content: '';
-    background-color: $color-black;
+      &::before {
+            content: '';
+            background-color: $color-black;
 
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: min(30%, 5rem);
-    height: 1px;
-    opacity: 0;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: min(30%, 5rem);
+            height: 1px;
+            opacity: 0;
 
-    transform: translateX(0);
-    transition: $transition-04;
-  }
+            transform: translateX(0);
+            transition: $transition-04;
+      }
+}
+
+// Main View text split
+
+@mixin mask {
+      overflow: hidden;
+      display: inline-block;
+}
+
+@mixin char {
+      display: inline-block;
+      opacity: 0;
 }
