@@ -16,7 +16,7 @@ const description = reactive({
             <template v-slot:fluff></template>
             <template v-slot:description> </template> -->
             <template v-slot:button>
-                  <ButtonEl class="btn--link btn--medium btn--gray btn--slide-black">
+                  <ButtonEl class="btn--link btn--medium btn--outline-purple btn--slide-purple">
                         <router-link to="/blog"> Learn More </router-link>
                   </ButtonEl>
             </template>

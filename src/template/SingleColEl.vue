@@ -1,17 +1,9 @@
 <script setup>
 import { gsap } from 'gsap'
 import SplitType from 'split-type'
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 
 defineProps(['description'])
-
-const textCharRef = ref()
-const fluffCharRef = ref()
-const headingCharRef = ref()
-
-const splitText = ref(null)
-const splitHeading = ref(null)
-const splitFluff = ref(null)
 
 const options = { rootMargin: ' 0px 0px -200px 0px' }
 const handleIntersection = (entries, observer) => {
@@ -19,68 +11,53 @@ const handleIntersection = (entries, observer) => {
             if (entry.isIntersecting) {
                   const tl = gsap.timeline()
                   const section = entry.target
-                  const textWords = section.querySelectorAll('.text-char .char')
-                  const headingWords = section.querySelectorAll('.single-col__heading .char')
-                  const fluffWords = section.querySelectorAll('.single-col__fluff .char')
-                  const underline = section.querySelectorAll('.underline')
-                  const button = section.querySelector('.btn')
+                  const heading = section.querySelector('.single-col__heading')
+                  const fluff = section.querySelector('.single-col__fluff')
+                  const text = section.querySelector('.section__text')
+                  const button = section.querySelector('.section__btn')
+                  const underline = section.querySelector('.heading-container .underline')
 
-                  tl.fromTo(
-                        headingWords,
+                  const headingSplit = new SplitType(heading, {
+                        types: 'lines, words, chars'
+                  })
+                  const fluffSplit = new SplitType(fluff, {
+                        types: 'lines, words, chars'
+                  })
+                  const textSplit = new SplitType(text, {
+                        types: 'lines, words, chars'
+                  })
 
-                        {
-                              opacity: 0
-                        },
-                        {
-                              duration: 0.5,
-                              stagger: 0.03,
+                  tl.to(heading, {
+                        duration: 0.1,
+                        opacity: 1
+                  })
+                        .to(fluff, {
+                              duration: 0.1,
                               opacity: 1
-                        },
-                        'heading'
-                  )
-
-                        .fromTo(
-                              fluffWords,
+                        })
+                        .from(headingSplit.chars, {
+                              stagger: 0.03,
+                              opacity: 0
+                        })
+                        .from(fluffSplit.chars, {
+                              stagger: 0.02,
+                              opacity: 0
+                        })
+                        .from(
+                              textSplit.chars,
                               {
+                                    stagger: 0.007,
                                     opacity: 0
                               },
-                              {
-                                    duration: 0.5,
-                                    stagger: 0.03,
-                                    opacity: 1
-                              },
-                              'fluff',
-                              'heading<'
+                              '<-=0.2'
                         )
-                        .fromTo(
-                              textWords,
-                              {
-                                    opacity: 0
-                              },
-
-                              {
-                                    opacity: 1,
-                                    duration: 1,
-                                    stagger: 0.004
-                              },
-                              'fluff<'
-                        )
-                        .fromTo(
-                              button,
-                              {
-                                    opacity: 0,
-                                    y: 20
-                              },
-
-                              {
-                                    duration: 0.5,
-                                    opacity: 1,
-                                    y: 0
-                              },
-                              '-=1'
-                        )
+                        .to(button, {
+                              duration: 0.4,
+                              opacity: 1,
+                              y: 0
+                        })
                         .to(underline, {
-                              duration: 1,
+                              duration: 0.4,
                               opacity: 1,
                               y: 0
                         })
@@ -91,28 +68,7 @@ const handleIntersection = (entries, observer) => {
 }
 
 onMounted(() => {
-      splitText.value = new SplitType(`#${textCharRef.value.id}`, { types: 'lines, words, chars' })
-      splitHeading.value = new SplitType(`#${headingCharRef.value.id}`, {
-            types: 'lines, words, chars'
-      })
-      splitFluff.value = new SplitType(`#${fluffCharRef.value.id}`, {
-            types: 'lines, words, chars'
-      })
-
       const sections = document.querySelectorAll('.single-col__description')
-      const headingWords = document.querySelectorAll('.single-col__heading .char')
-      const fluffWords = document.querySelectorAll('.single-col__fluff .char')
-      const textWords = document.querySelectorAll('.text-char .char')
-
-      headingWords.forEach((word) => {
-            word.style.opacity = '0'
-      })
-      fluffWords.forEach((word) => {
-            word.style.opacity = '0'
-      })
-      textWords.forEach((word) => {
-            word.style.opacity = '0'
-      })
 
       sections.forEach((el) => {
             textObserver.observe(el)
@@ -123,22 +79,25 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
 
 <template>
       <section class="single-col__description">
-            <h2 class="single-col__heading" ref="headingCharRef" id="heading-char">
-                  {{ description.heading }}
-                  <div class="underline"></div>
-            </h2>
-            <h3 class="single-col__fluff" ref="fluffCharRef" id="fluff-char">
+            <div class="heading-container">
+                  <h2 class="single-col__heading" id="heading-char">
+                        {{ description.heading }}
+                  </h2>
+                  <div class="underline" id="underline-section"></div>
+            </div>
+
+            <h3 class="single-col__fluff" id="fluff-char">
                   {{ description.fluff }}
             </h3>
             <article class="section__text">
-                  <div class="mask">
-                        <p class="text-char" id="text-char" ref="textCharRef">
-                              {{ description.text }}
-                        </p>
-                  </div>
+                  <p class="text-char" id="text-char">
+                        {{ description.text }}
+                  </p>
             </article>
 
-            <slot name="button"></slot>
+            <div class="section__btn">
+                  <slot name="button"></slot>
+            </div>
       </section>
 </template>
 
@@ -152,19 +111,26 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
             white-space: pre-wrap;
             line-height: 1.1;
             position: relative;
+            margin-bottom: 1rem;
+            opacity: 0;
+      }
+
+      .heading-container {
+            position: relative;
       }
       .underline {
             position: absolute;
             inset: 0;
             opacity: 0;
-            transform: translateY(20px);
+
+            transform: translateY(50px);
 
             &::before {
                   content: '';
                   background-color: $color-purple;
 
                   position: absolute;
-                  bottom: -8px;
+                  bottom: 0;
                   left: 50%;
                   width: min(30%, 80px);
                   height: 3px;
@@ -172,26 +138,18 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
                   transform: translateX(-50%);
             }
       }
-
-      .mask {
-            @include mask;
-      }
-
-      .text-char {
-            font-kerning: none;
+      .section__btn {
+            opacity: 0;
+            transform: translateY(50px);
       }
 
       .single-col__fluff {
-            margin-block: 2rem 1.5vw;
-            @include breakpoint {
-                  margin-block: 2rem 1.5vw;
-                  white-space: pre-wrap;
-            }
+            margin-block: 2rem 3rem;
+            opacity: 0;
       }
 
       .section__text {
             margin-block: 2rem;
-            white-space: pre-wrap;
       }
 }
 

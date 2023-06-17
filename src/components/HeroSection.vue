@@ -2,55 +2,47 @@
 // import ButtonEl from '../template/ButtonEl.vue'
 import { gsap } from 'gsap'
 import SplitType from 'split-type'
-import { ref, onMounted } from 'vue'
-
-const textCharRef = ref()
-const fluffCharRef = ref()
-const headingCharRef = ref()
-
-function onLoadAnimation() {
-      const splitText = new SplitType(`#${textCharRef.value.id}`, { types: 'lines, words, chars' })
-      const splitHeading = new SplitType(`#${headingCharRef.value.id}`, {
-            types: 'lines, words, chars'
-      })
-      const splitFluff = new SplitType(`#${fluffCharRef.value.id}`, {
-            types: 'lines, words, chars'
-      })
-
-      const tl = gsap.timeline()
-      const textWords = document.querySelectorAll('.text-char .char')
-      const headingWords = document.querySelectorAll('.hero__heading .char')
-      const fluffWords = document.querySelectorAll('.hero__heading-fluff .char')
-      const underline = document.querySelectorAll('.underline')
-
-      // headingWords.forEach((word) => {
-      //       word.style.opacity = '0'
-      // })
-      // fluffWords.forEach((word) => {
-      //       word.style.opacity = '0'
-      // })
-      // textWords.forEach((word) => {
-      //       word.style.opacity = '0'
-      // })
-
-      tl.fromTo(
-            splitHeading.chars,
-
-            {
-                  opacity: 0
-            },
-            {
-                  duration: 0.5,
-                  stagger: 0.03,
-                  opacity: 1
-            },
-            'heading'
-      )
-}
+import { onMounted } from 'vue'
 
 onMounted(() => {
-      setTimeout(onLoadAnimation, 1000)
-      
+      const textSplit = new SplitType(`#text-hero`, {
+            types: 'lines, words, chars'
+      })
+      const fluffSplit = new SplitType(`#fluff-hero`, {
+            types: 'lines, words, chars'
+      })
+      const headingSplit = new SplitType(`#heading-hero`, {
+            types: 'lines, words, chars'
+      })
+      const tl = gsap.timeline()
+
+      tl.from(headingSplit.chars, {
+            delay: 0.3,
+            stagger: 0.03,
+            opacity: 0
+      })
+            .from(
+                  fluffSplit.chars,
+                  {
+                        stagger: 0.02,
+                        opacity: 0
+                  },
+                  '<-=0.1'
+            )
+            .from(
+                  textSplit.chars,
+                  {
+                        stagger: 0.007,
+                        opacity: -10
+                  },
+                  '-=0.8'
+            )
+            .from('#underline-hero', {
+                  duration: 0.5,
+                  opacity: 0,
+                  y: 50,
+                  zIndex: -1
+            })
 })
 </script>
 
@@ -58,14 +50,15 @@ onMounted(() => {
       <section class="hero">
             <article class="hero__description">
                   <div class="hero__content">
-                        <p class="hero__heading" ref="headingCharRef" id="heading-char">
+                        <h1 @enter="onEnter" class="hero__heading" id="heading-hero">
                               homey goat
-                              <div class="underline"></div>
-                        </p>
-                        <h3 class="hero__heading-fluff" id="fluff-char" ref="fluffCharRef">
-                              professional miniature painting studio
+                              <div class="underline" id="underline-hero"></div>
+                        </h1>
+
+                        <h3 class="hero__heading-fluff" id="fluff-hero">
+                              Professional Miniature Painting Studio
                         </h3>
-                        <p class="text-char" id="text-char" ref="textCharRef">
+                        <p id="text-hero">
                               Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nihil
                               cumque sit porro quae dolore autem sapiente molestias repellendus ad,
                               fugit quisquam suscipit optio inventore!
@@ -129,19 +122,19 @@ onMounted(() => {
             }
 
             .bg-img-1 {
-                  background-image: url('../images/th-clean.webp');
+                  background-image: url('../images/main/th-clean.webp');
                   background-position: top 20% left 30%;
             }
 
             .bg-img-2 {
-                  background-image: url('../images/skull-clean.webp');
+                  background-image: url('../images/main/skull-clean.webp');
                   background-position: center;
                   margin-left: -5%;
             }
 
             .bg-img-3 {
-                  background-image: url('../images/HB-clean.webp');
-                  background-position: center;
+                  background-image: url('../images/main/Yoroi-clean.webp');
+                  background-position: center left 33%;
                   margin-left: -10%;
             }
 
@@ -150,7 +143,7 @@ onMounted(() => {
 
                   right: 0;
                   .bg-img {
-                        background-position: center;
+                        // background-position: center;
                         background-size: cover;
                         filter: grayscale(1) opacity(0.5);
                   }
@@ -168,25 +161,20 @@ onMounted(() => {
 
             .hero__heading {
                   color: $color-white;
-                  text-transform: uppercase;
                   margin-bottom: 1rem;
                   position: relative;
 
-                  .char {
-                        opacity: 0;
-                  }
                   .underline {
                         position: absolute;
                         inset: 0;
-                        opacity: 1;
-                        transform: translateY(20px);
+                        // opacity: 0;
 
                         &::before {
                               content: '';
                               background-color: $color-purple;
 
                               position: absolute;
-                              bottom: 25%;
+                              bottom: 0;
                               left: 50%;
                               width: min(30%, 150px);
                               height: clamp(3px, 0.5vw, 5px);
@@ -197,9 +185,9 @@ onMounted(() => {
             }
 
             .hero__heading-fluff {
-                  text-transform: capitalize;
                   color: $color-white;
                   margin-bottom: 3rem;
+                  margin-top: 1rem;
             }
 
             .hero__btns {

@@ -41,6 +41,10 @@
       @include btn--black;
 }
 
+.btn--purple {
+      @include btn--purple;
+}
+
 .btn--outline-white {
       @include btn--outline-white;
 }
@@ -49,12 +53,8 @@
       @include btn--outline-black;
 }
 
-.btn--outline-green {
-      @include btn--outline-green;
-}
-
-.btn--outline-red {
-      @include btn--outline-red;
+.btn--outline-purple {
+      @include btn--outline-purple;
 }
 
 // Effects
@@ -67,11 +67,7 @@
       @include btn--slide-white;
 }
 
-.btn--slide-green {
-      @include btn--slide-green;
-}
-
-.btn--slide-red {
-      @include btn--slide-red;
+.btn--slide-purple {
+      @include btn--slide-purple;
 }
 </style>

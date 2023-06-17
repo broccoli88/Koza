@@ -6,68 +6,54 @@ import SplitType from 'split-type'
 const props = defineProps(['imgLink', 'description'])
 const img = ref(props.imgLink)
 
-const textCharRef = ref(null)
-const headingCharRef = ref(null)
-
-const splitText = ref(null)
-const splitHeading = ref(null)
-
 const options = { rootMargin: ' 0px 0px -200px 0px' }
 const handleIntersection = (entries, observer) => {
       entries.forEach((entry) => {
             if (entry.isIntersecting) {
                   const tl = gsap.timeline()
                   const section = entry.target
-                  const textWords = section.querySelectorAll('.text-char .char')
-                  const headingWords = section.querySelectorAll('.section__heading .char')
-                  const underline = section.querySelectorAll('.underline')
-                  const button = section.querySelector('.btn')
+                  const heading = section.querySelector('.section__heading')
+                  const text = section.querySelector('.section__text')
+                  const button = section.querySelector('.section__btn')
+                  const underline = section.querySelector('.heading-container .underline')
 
-                  tl.fromTo(
-                        headingWords,
+                  const headingSplit = new SplitType(heading, {
+                        types: 'lines, words, chars'
+                  })
+                  const textSplit = new SplitType(text, {
+                        types: 'lines, words, chars'
+                  })
+
+                  tl.to(heading, {
+                        duration: 0.1,
+                        opacity: 1
+                  })
+                  tl.to(text, {
+                        duration: 0.1,
+                        opacity: 1
+                  })
+                  tl.from(headingSplit.chars, {
+                        stagger: 0.03,
+                        opacity: 0
+                  })
+                  tl.from(
+                        textSplit.chars,
                         {
+                              stagger: 0.007,
                               opacity: 0
                         },
-                        {
-                              duration: 1,
-                              stagger: 0.03,
-                              opacity: 1
-                        },
-                        'heading'
+                        '<-=0.2'
                   )
-
-                        .fromTo(
-                              textWords,
-                              {
-                                    opacity: 0
-                              },
-
-                              {
-                                    opacity: 1,
-                                    duration: 1,
-                                    stagger: 0.004
-                              },
-                              'heading-=0.1'
-                        )
-                        .fromTo(
-                              button,
-                              {
-                                    opacity: 0,
-                                    y: 20
-                              },
-
-                              {
-                                    duration: 0.5,
-                                    opacity: 1,
-                                    y: 0
-                              },
-                              '-=1'
-                        )
-                        .to(underline, {
-                              duration: 0.5,
-                              opacity: 1,
-                              y: 0
-                        })
+                  tl.to(button, {
+                        duration: 0.4,
+                        opacity: 1,
+                        y: 0
+                  })
+                  tl.to(underline, {
+                        duration: 0.4,
+                        opacity: 1,
+                        y: 0
+                  })
 
                   observer.unobserve(section)
             }
@@ -75,10 +61,6 @@ const handleIntersection = (entries, observer) => {
 }
 
 onMounted(() => {
-      splitText.value = new SplitType(`#${textCharRef.value.id}`, { types: 'lines, words, chars' })
-      splitHeading.value = new SplitType(`#${headingCharRef.value.id}`, {
-            types: 'lines, words, chars'
-      })
       const sections = document.querySelectorAll('.section')
 
       sections.forEach((el) => {
@@ -92,19 +74,21 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
       <section class="section">
             <img class="section__img" :data-src="img" :src="img" alt="" />
             <article class="section__description">
-                  <h2 class="section__heading" ref="headingCharRef" id="heading-char">
-                        {{ description.heading }}
-                        <div class="underline"></div>
-                  </h2>
+                  <div class="heading-container">
+                        <h2 class="section__heading" id="heading-section">
+                              {{ description.heading }}
+                        </h2>
+                        <div class="underline" id="underline-section"></div>
+                  </div>
 
                   <article class="section__text">
-                        <div class="mask">
-                              <p class="text-char" id="text-char" ref="textCharRef">
-                                    {{ description.text }}
-                              </p>
-                        </div>
+                        <p class="text-char" id="text-section">
+                              {{ description.text }}
+                        </p>
                   </article>
-                  <slot name="button"></slot>
+                  <div class="section__btn">
+                        <slot id="slot" name="button"></slot>
+                  </div>
             </article>
       </section>
 </template>
@@ -117,32 +101,36 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
 
       .section__img {
             @include img;
-            filter: grayscale(1);
+            // filter: grayscale(1);
       }
 
       .section__description {
             @include description(2vw);
             margin-bottom: 0;
 
+            .heading-container {
+                  position: relative;
+            }
             .section__heading {
                   white-space: pre-wrap;
                   line-height: 1.1;
                   position: relative;
                   margin-bottom: 1rem;
+                  opacity: 0;
             }
             .underline {
                   position: absolute;
                   inset: 0;
                   opacity: 0;
 
-                  transform: translateY(20px);
+                  transform: translateY(50px);
 
                   &::before {
                         content: '';
                         background-color: $color-purple;
 
                         position: absolute;
-                        bottom: -8px;
+                        bottom: 0;
                         left: 50%;
                         width: min(30%, 80px);
                         height: 3px;
@@ -151,22 +139,15 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
                   }
             }
 
-            .mask {
-                  @include mask;
+            .section__text {
+                  margin-block: 2rem;
+                  opacity: 0;
             }
 
-            .heading-char {
-                  @include char;
+            .section__btn {
+                  opacity: 0;
+                  transform: translateY(50px);
             }
-
-            .text-char {
-                  font-kerning: none;
-            }
-      }
-
-      .section__text {
-            margin-block: 2rem;
-            white-space: pre-wrap;
       }
 }
 .reverse {

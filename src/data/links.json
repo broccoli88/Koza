@@ -1,9 +1,13 @@
 {
-  "links": {
-    "main": { "name": "Main", "path": "/", "img": "" },
-    "gallery": { "name": "Gallery", "path": "/gallery", "img": "/images/th-clean.webp" },
-    "offer": { "name": "offer", "path": "/offer", "img": "/images/th-clean.webp" },
-    "team": { "name": "About", "path": "/team", "img": "/images/HB-clean.webp" },
-    "contact": { "name": "contact", "path": "/contact", "img": "/images/covenant.webp" }
-  }
+      "links": {
+            "main": { "name": "Main", "path": "/", "img": "" },
+            "gallery": {
+                  "name": "Gallery",
+                  "path": "/gallery",
+                  "img": "/images/main/th-clean.webp"
+            },
+            "offer": { "name": "offer", "path": "/offer", "img": "/images/main/jumper-clean.webp" },
+            "team": { "name": "About", "path": "/team", "img": "/images/main/Yoroi2-clean.webp" },
+            "contact": { "name": "contact", "path": "/contact", "img": "/images/main/frog.webp" }
+      }
 }
