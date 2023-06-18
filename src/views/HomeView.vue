@@ -7,11 +7,11 @@ import ContactAndBlogSection from '../components/ContactAndBlogSection.vue'
 </script>
 
 <template>
-  <main>
-    <HeroSection />
-    <GallerySection />
-    <OfferSection />
-    <TeamSection />
-    <ContactAndBlogSection />
-  </main>
+      <main>
+            <HeroSection />
+            <GallerySection />
+            <OfferSection />
+            <TeamSection />
+            <ContactAndBlogSection />
+      </main>
 </template>
