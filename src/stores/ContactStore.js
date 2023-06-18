@@ -49,33 +49,36 @@ export const useContactStore = defineStore('contactStore', () => {
 
       const rules1 = {
             firstName: {
-                  required,
+                  required: helpers.withMessage('Give me your name human!', required),
                   minLength: minLength(3),
                   maxLength: maxLength(15),
                   $autoDirty: true,
                   $lazy: true
             },
             lastName: {
-                  required,
+                  required: helpers.withMessage('Give me your last name human!', required),
                   minLength: minLength(3),
                   maxLength: maxLength(15),
                   $autoDirty: true,
                   $lazy: true
             },
             email: {
-                  required: helpers.withMessage('Enter email', required),
+                  required: helpers.withMessage('Forgot your email human...?', required),
                   email,
                   maxLength: maxLength(40),
                   $autoDirty: true,
                   $lazy: true
             },
             subject: {
-                  required: helpers.withMessage('Enter what this message is about...', required),
+                  required: helpers.withMessage(
+                        'Enter what this message is about human...',
+                        required
+                  ),
                   $lazy: true
             },
 
             message: {
-                  required,
+                  required: helpers.withMessage('State your business human...??', required),
                   minLength: minLength(3),
                   maxLength: maxLength(1000),
                   $autoDirty: true,
@@ -130,43 +133,46 @@ export const useContactStore = defineStore('contactStore', () => {
 
       const rules2 = {
             firstName: {
-                  required,
+                  required: helpers.withMessage('Give me your name human!', required),
                   minLength: minLength(3),
                   maxLength: maxLength(15),
                   $autoDirty: true,
                   $lazy: true
             },
             lastName: {
-                  required,
+                  required: helpers.withMessage('Give me your last name human!', required),
                   minLength: minLength(3),
                   maxLength: maxLength(15),
                   $autoDirty: true,
                   $lazy: true
             },
             email: {
-                  required: helpers.withMessage('Enter email', required),
+                  required: helpers.withMessage('Forgot your email human...?', required),
                   email,
                   maxLength: maxLength(40),
                   $autoDirty: true,
                   $lazy: true
             },
             country: {
-                  required,
+                  required: helpers.withMessage(
+                        "You know where you came from, ain't ya, human?  ",
+                        required
+                  ),
                   minLength: minLength(3),
                   maxLength: maxLength(15),
                   $autoDirty: true,
                   $lazy: true
             },
             modelSupply: {
-                  required: helpers.withMessage('Select an option', required),
+                  required: helpers.withMessage('You must pick something human! ', required),
                   $lazy: true
             },
             service: {
-                  required: helpers.withMessage('At least one option must be selected', required),
+                  required: helpers.withMessage('You know what you want , right human?', required),
                   $lazy: true
             },
             message: {
-                  required,
+                  required: helpers.withMessage('State your business human...', required),
                   minLength: minLength(3),
                   maxLength: maxLength(1000),
                   $autoDirty: true,

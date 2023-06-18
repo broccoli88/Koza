@@ -3,7 +3,7 @@ import LogoEl from '../template/LogoEl.vue'
 import ButtonEl from '../template/ButtonEl.vue'
 import { useLoginStore } from '../stores/LoginStore'
 import { useRouter } from 'vue-router'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 
 const router = useRouter()
 
@@ -154,6 +154,7 @@ const defaultLogin = computed(() => {
                   gap: 0.5rem;
                   align-items: center;
                   margin-bottom: 2rem;
+                  word-wrap: break-word;
 
                   svg {
                         width: clamp(1.8rem, 0.7rem + 1vw, 2.5rem);

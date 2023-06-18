@@ -276,6 +276,7 @@ adminStore.getSystems()
             .form__input {
                   @include form-input;
                   order: initial;
+                  background: $color-white;
             }
 
             .error {

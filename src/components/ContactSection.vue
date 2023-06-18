@@ -4,7 +4,7 @@ import SingleColEl from '../template/SingleColEl.vue'
 import { reactive } from 'vue'
 
 const description = reactive({
-      heading: `Have Any questions?`,
+      heading: `Have Any Questions?`,
       fluff: 'Contact us!',
       text: `You have questions that don't require quote? Feel free to ask us anytime about anything that is connected to painting and basing miniatures! We will gladly answer all your questions.`
 })

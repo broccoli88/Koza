@@ -49,7 +49,7 @@ export const useLoginStore = defineStore('loginStore', () => {
             }
 
             try {
-                  await setPersistence(auth, browserSessionPersistence)
+                  // await setPersistence(auth, browserSessionPersistence)
                   await signInWithEmailAndPassword(auth, acc.user, acc.pass)
 
                   fetchUser()

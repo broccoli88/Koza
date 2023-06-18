@@ -10,7 +10,7 @@ const links = reactive(linksData.links)
 const header = ref()
 const navHeight = ref()
 const route = useRoute()
-const showDesktopAdminPanel = ref(true)
+const showDesktopAdminPanel = ref(false)
 
 const isUserLoggedIn = computed(() => {
       return auth.currentUser
@@ -34,31 +34,31 @@ watch(
 
 // check if desktop to display admin panel
 
-// window.addEventListener('resize', () => {
-//       if (window.innerWidth < 768) {
-//             showDesktopAdminPanel.value = false
-//       } else {
-//             showDesktopAdminPanel.value = true
-//       }
+window.addEventListener('resize', () => {
+      if (window.innerWidth < 768) {
+            showDesktopAdminPanel.value = false
+      } else {
+            showDesktopAdminPanel.value = true
+      }
 
-//       if (!header.value || header.value.classList === null) {
-//             return
-//       } else {
-//             if (window.innerWidth >= 768) {
-//                   navUnwrapped.value = false
-//             }
-//             navHeight.value = header.value.clientHeight
-//       }
-// })
+      if (!header.value || header.value.classList === null) {
+            return
+      } else {
+            if (window.innerWidth >= 768) {
+                  navUnwrapped.value = false
+            }
+            navHeight.value = header.value.clientHeight
+      }
+})
 
 //  Intersection Observer + Nav Height
 onMounted(() => {
       //   check if desktop to display admin panel
-      // if (window.innerWidth >= 768) {
-      //       showDesktopAdminPanel.value = true
-      // } else {
-      //       showDesktopAdminPanel.value = false
-      // }
+      if (window.innerWidth >= 768) {
+            showDesktopAdminPanel.value = true
+      } else {
+            showDesktopAdminPanel.value = false
+      }
 
       // Nav Observer
 
@@ -111,7 +111,7 @@ onMounted(() => {
                                     >
                               </li>
                         </ul>
-                        <div v-if="showDesktopAdminPanel">
+                        <!-- <div v-if="showDesktopAdminPanel">
                               <router-link
                                     v-if="!isUserLoggedIn"
                                     class="admin-panel"
@@ -156,7 +156,7 @@ onMounted(() => {
                                     </svg>
                                     <p>Admin</p>
                               </router-link>
-                        </div>
+                        </div> -->
                   </nav>
             </div>
       </header>

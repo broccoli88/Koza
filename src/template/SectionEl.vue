@@ -97,7 +97,8 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
 .section {
       @include section-double-col;
       grid-template-rows: 350px 1fr;
-      padding-bottom: 4rem;
+
+      // padding-bottom: 4rem;
 
       .section__img {
             @include img;
@@ -106,7 +107,10 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
 
       .section__description {
             @include description(2vw);
+
             margin-bottom: 0;
+            // height: min-content;
+            // place-content: initial;
 
             .heading-container {
                   position: relative;
