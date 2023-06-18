@@ -6,7 +6,7 @@ import { reactive, ref } from 'vue'
 const imgLink = ref('/images/main/gargant.webp')
 const description = reactive({
       heading: 'Gallery',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, a minima temporibus perspiciatis quasi ut harum nulla, eos qui amet excepturi maxime illum, facere ea sit ab officiis libero dolor. Laborum adipisci consequatur, rem reprehenderit quidem eos ut sapiente fuga.'
+      text: 'We love to dedicate full time to miniature painting! If you are a lover of wargames in our gallery you can see different models painted example of our painting levels and some of our best miniatures.'
 })
 </script>
 <template>

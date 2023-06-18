@@ -3,7 +3,6 @@ import { reactive, ref } from 'vue'
 import Painting from './OfferPainting.vue'
 import Assembly from './OfferAssembly.vue'
 import Basing from './OfferBasing.vue'
-import Cleaning from './OfferCleaning.vue'
 import FadeTransition from '../utils/transitions/FadeTransition.vue'
 
 const sections = reactive({
@@ -18,10 +17,6 @@ const sections = reactive({
       basing: {
             title: 'Basing',
             active: false
-      },
-      cleaning: {
-            title: 'Cleaning',
-            active: false
       }
 })
 
@@ -29,7 +24,6 @@ const currentTab = ref('Painting')
 const tabs = {
       Assembly,
       Basing,
-      Cleaning,
       Painting
 }
 
@@ -91,13 +85,13 @@ const changeSection = (section) => {
 
             .active {
                   .desktop-offer__section-item-title {
-                        color: $color-purple;
+                        color: $color-black;
 
                         &::before {
                               left: 10%;
-                              background-color: $color-purple;
+                              // bottom: 2px;
+                              background-color: $color-black;
 
-                              //   transform: translateX(-50%);
                               opacity: 1;
                         }
                   }

@@ -6,8 +6,8 @@ import { ref, reactive } from 'vue'
 
 const imgLink = ref('/images/main/workstation.webp')
 const description = reactive({
-      heading: 'Great Painters',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, a minima temporibus perspiciatis quasi ut harum nulla, eos qui amet excepturi maxime illum, facere ea sit ab officiis libero dolor. Laborum adipisci consequatur, rem reprehenderit quidem eos ut sapiente fuga.'
+      heading: 'Our Team',
+      text: 'We always have our eyes on painting miniatures. If you´re looking for our faces, here you can know who we are! Discover our way.'
 })
 </script>
 <template>

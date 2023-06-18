@@ -59,9 +59,9 @@ onMounted(() => {
                               Professional Miniature Painting Studio
                         </h3>
                         <p id="text-hero">
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat nihil
-                              cumque sit porro quae dolore autem sapiente molestias repellendus ad,
-                              fugit quisquam suscipit optio inventore!
+                              Welcome to Homey Goat Studio! We are here to help turn your creative
+                              ideas for wargaming miniatures into reality through unrivalled
+                              service, excellent communication and dedication to your project.
                         </p>
                         <!-- <div class="hero__btns">
                               <ButtonEl class="btn--link btn--medium btn--gray btn--slide-black">
@@ -146,6 +146,7 @@ onMounted(() => {
                         // background-position: center;
                         background-size: cover;
                         filter: grayscale(1) opacity(0.5);
+                        // filter: none;
                   }
 
                   .bg-img-1 {

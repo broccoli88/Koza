@@ -4,20 +4,17 @@ import ButtonEl from '../template/ButtonEl.vue'
 import SingleColEl from '../template/SingleColEl.vue'
 
 const description = reactive({
-      heading: `Interested what's new?`,
-      fluff: 'Check out our blog!',
-      text: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia optio eligendi minima rerum cupiditate tenetur, officiis commodi reprehenderit, odit consectetur sapiente molestias error voluptatum incidunt sint. Magnam repellat eligendi qui iste sapiente, id voluptas, et obcaecati accusamus, debitis at nostrum!'
+      heading: `Need a Quote?`,
+      fluff: 'Fill out the form, and we will get back to you.',
+      text: ' Den of Imagination Studio is one of the largest painting studios which, offers worldwide services regarding miniature models. We offer variety of services, with great quality-price ratio! If you want to know more click the button below. Be sure to fill in the DoI Instruction file, to get a fast reply regarding your commission. '
 })
 </script>
 
 <template>
       <SingleColEl :description="description">
-            <!-- <template v-slot:heading></template>
-            <template v-slot:fluff></template>
-            <template v-slot:description> </template> -->
             <template v-slot:button>
                   <ButtonEl class="btn--link btn--medium btn--outline-purple btn--slide-purple">
-                        <router-link to="/blog"> Learn More </router-link>
+                        <router-link to="/contact"> Learn More </router-link>
                   </ButtonEl>
             </template>
       </SingleColEl>

@@ -6,7 +6,7 @@ import { reactive } from 'vue'
 const description = reactive({
       heading: `Have Any questions?`,
       fluff: 'Contact us!',
-      text: '   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia optio eligendi minima rerum cupiditate tenetur, officiis commodi reprehenderit, odit consectetur sapiente molestias error voluptatum incidunt sint. Magnam repellat eligendi qui iste sapiente, id voluptas, et obcaecati accusamus, debitis at nostrum!'
+      text: `You have questions that don't require quote? Feel free to ask us anytime about anything that is connected to painting and basing miniatures! We will gladly answer all your questions.`
 })
 </script>
 

@@ -15,7 +15,7 @@ const loginStore = useLoginStore()
 const adminStore = useAdminStore()
 adminStore.getSystems()
 
-const showAdminLogin = ref(false)
+const showAdminLogin = ref(true)
 
 onMounted(() => {
       window.addEventListener('keydown', (e) => {

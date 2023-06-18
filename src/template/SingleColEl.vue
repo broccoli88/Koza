@@ -86,9 +86,11 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
                   <div class="underline" id="underline-section"></div>
             </div>
 
-            <h3 class="single-col__fluff" id="fluff-char">
-                  {{ description.fluff }}
-            </h3>
+            <div class="fluff-container">
+                  <h3 class="single-col__fluff" id="fluff-char">
+                        {{ description.fluff }}
+                  </h3>
+            </div>
             <article class="section__text">
                   <p class="text-char" id="text-char">
                         {{ description.text }}
@@ -104,8 +106,14 @@ const textObserver = new IntersectionObserver(handleIntersection, options)
 <style lang="scss" scoped>
 .single-col__description {
       @include description;
+
       padding-bottom: 4rem;
       margin-bottom: 0;
+
+      @include breakpoint {
+            margin-top: 30%;
+            align-content: baseline;
+      }
 
       .single-col__heading {
             white-space: pre-wrap;
