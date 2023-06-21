@@ -10,7 +10,8 @@ const links = reactive(linksData.links)
 const header = ref()
 const navHeight = ref()
 const route = useRoute()
-const showDesktopAdminPanel = ref(false)
+
+const showDesktopAdminPanel = ref(true)
 
 const isUserLoggedIn = computed(() => {
       return auth.currentUser
@@ -29,6 +30,10 @@ watch(
       () => route.fullPath,
       () => {
             navUnwrapped.value = false
+
+            if (route.fullPath === '/blog') {
+                  header.value.style.display = 'initial'
+            }
       }
 )
 
