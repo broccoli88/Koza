@@ -8,7 +8,7 @@ import ButtonEl from './ButtonEl.vue'
                   <img class="preview__img" src="/images/blog/blog.jpeg" alt="" />
             </figure>
             <section class="preview__content">
-                  <router-link to="#" class="preview__title"
+                  <router-link to="/blog/blog-post-1" class="preview__title"
                         >Miniature base made of coconut</router-link
                   >
                   <p class="preview__text">

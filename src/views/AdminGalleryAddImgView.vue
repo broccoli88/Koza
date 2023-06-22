@@ -63,7 +63,7 @@ adminStore.getSystems()
 
 <template>
       <section class="container">
-            <form action="" class="form" @submit.prevent="uploadData">
+            <form class="form" @submit.prevent="uploadData">
                   <section class="form__section">
                         <fieldset class="form__fieldset">
                               <legend>Choose/Add System</legend>
@@ -233,16 +233,6 @@ adminStore.getSystems()
 .container {
       margin: $margin-admin;
       display: grid;
-
-      h3 {
-            margin-bottom: 3rem;
-      }
-
-      .btns {
-            display: flex;
-            gap: 3rem;
-            margin-bottom: 2rem;
-      }
 
       .form {
             // max-width: 70ch;

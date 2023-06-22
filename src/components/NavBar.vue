@@ -29,10 +29,6 @@ watch(
       () => route.fullPath,
       () => {
             navUnwrapped.value = false
-
-            if (route.fullPath === '/blog') {
-                  header.value.style.position = 'initial'
-            }
       }
 )
 

@@ -42,7 +42,7 @@
 .media-blog {
       .container {
             position: sticky;
-            top: 4rem;
+            top: 10rem;
 
             display: grid;
             gap: 2rem;
