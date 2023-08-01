@@ -28,7 +28,7 @@ const id = ref(props.post.sys.id)
                   <footer class="preview__footer">
                         <p>{{ dateParts[0] }}, {{ dateParts[1] }}</p>
                         <ButtonEl class="btn--small btn--outline-black btn--slide-black btn--link">
-                              <router-link to="#"> Read more </router-link>
+                              <router-link :to="`/blog/${id}`"> Read more </router-link>
                         </ButtonEl>
                   </footer>
             </section>
