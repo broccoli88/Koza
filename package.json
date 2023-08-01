@@ -12,6 +12,7 @@
   "dependencies": {
     "@vuelidate/core": "^2.0.2",
     "@vuelidate/validators": "^2.0.2",
+    "contentful": "^10.3.0",
     "firebase": "^9.22.1",
     "gsap": "^3.12.1",
     "pinia": "^2.1.3",

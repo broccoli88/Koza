@@ -2,7 +2,11 @@
 import BlogPostPreviewEl from '../template/BlogPostPreviewEl.vue'
 import BlogMedia from '../components/BlogMedia.vue'
 import { onMounted, ref } from 'vue'
+import { useBlogStore } from '../stores/BlogStore'
+import { storeToRefs } from 'pinia'
 
+const blogStore = useBlogStore()
+const { blogData } = storeToRefs(blogStore)
 const showMediaPanel = ref(false)
 
 window.addEventListener('resize', () => {
@@ -17,15 +21,17 @@ onMounted(() => {
       if (window.innerWidth >= 1024) {
             showMediaPanel.value = true
       }
+
+      blogStore.getBlogData()
 })
 </script>
 
 <template>
-      <section class="themes-blog">
+      <section class="themes-blog" v-if="blogData.length > 0">
             <h1 class="blog__heading">Blog</h1>
             <BlogMedia class="blog__media" v-if="showMediaPanel" />
             <section class="blog__previews">
-                  <BlogPostPreviewEl v-for="n in 5" :key="n" />
+                  <BlogPostPreviewEl v-for="post in blogData" :key="post.sys.id" :post="post" />
             </section>
       </section>
 </template>

@@ -1,22 +1,32 @@
 <script setup>
+import { computed, ref } from 'vue'
 import ButtonEl from './ButtonEl.vue'
+
+const props = defineProps(['post'])
+
+const previewText = computed(() => {
+      return props.post.fields.postText1.substring(0, 200) + '...'
+})
+
+const dateString = ref(props.post.fields.postCreationDate)
+const dateParts = computed(() => dateString.value.split(/T/))
+const id = ref(props.post.sys.id)
 </script>
 
 <template>
       <article class="blog-preview">
-            <figure>
-                  <img class="preview__img" src="/images/blog/blog.jpeg" alt="" />
+            <figure class="preview__img-container">
+                  <img class="preview__img" :src="post.fields.postBanner.fields.file.url" alt="" />
             </figure>
             <section class="preview__content">
-                  <router-link to="/blog/blog-post-1" class="preview__title"
-                        >Miniature base made of coconut</router-link
-                  >
+                  <router-link :to="`/blog/${id}`" class="preview__title">{{
+                        post.fields.postTitle
+                  }}</router-link>
                   <p class="preview__text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil magnam
-                        aperiam ea assumenda voluptates quas...
+                        {{ previewText }}
                   </p>
                   <footer class="preview__footer">
-                        <p>24/06/2023</p>
+                        <p>{{ dateParts[0] }}, {{ dateParts[1] }}</p>
                         <ButtonEl class="btn--small btn--outline-black btn--slide-black btn--link">
                               <router-link to="#"> Read more </router-link>
                         </ButtonEl>
@@ -51,6 +61,13 @@ import ButtonEl from './ButtonEl.vue'
       @include breakpoint {
             max-height: 40rem;
             flex-direction: row;
+      }
+
+      .preview__img-container {
+            max-height: 30vh;
+            @include breakpoint {
+                  width: 50%;
+            }
       }
 
       .preview__img {
