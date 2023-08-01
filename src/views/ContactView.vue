@@ -12,7 +12,7 @@ const contactStore = useContactStore()
 const { questionForm } = storeToRefs(contactStore)
 </script>
 <template>
-      <main>
+      <section>
             <BannerEl />
 
             <section class="description">
@@ -70,7 +70,7 @@ const { questionForm } = storeToRefs(contactStore)
                   </div>
             </section>
             <ModalContact />
-      </main>
+      </section>
 </template>
 
 <style lang="scss" scoped>

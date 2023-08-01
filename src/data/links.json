@@ -9,6 +9,7 @@
             "offer": { "name": "offer", "path": "/offer", "img": "/images/main/jumper-clean.webp" },
             "team": { "name": "About", "path": "/team", "img": "/images/main/Yoroi2-clean.webp" },
             "contact": { "name": "contact", "path": "/contact", "img": "/images/main/frog.webp" },
+            "blog": { "name": "blog", "path": "/blog", "img": "/images/main/frog.webp" },
             "admin": { "name": "admin panel", "path": "/admin-panel", "img": "" }
       }
 }

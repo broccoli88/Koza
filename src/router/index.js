@@ -29,6 +29,23 @@ const router = createRouter({
                   component: () => import('../views/OfferView.vue')
             },
             {
+                  path: '/blog',
+                  name: 'blog',
+                  component: () => import('../views/BlogView.vue'),
+                  children: [
+                        {
+                              path: '',
+                              name: 'blog-previews',
+                              component: () => import('../views/BlogPostsView.vue')
+                        },
+                        {
+                              path: '/blog/:id',
+                              name: 'blog-post',
+                              component: () => import('../views/BlogPostView.vue')
+                        }
+                  ]
+            },
+            {
                   path: '/admin-login',
                   name: 'admin-login',
                   component: () => import('../views/AdminLoginView.vue')
@@ -39,14 +56,14 @@ const router = createRouter({
                   component: () => import('../views/AdminPanelView.vue'),
 
                   meta: { requiresAuth: true },
-                  beforeEnter: async (to, from, next) => {
-                        if (to.path.includes('/admin-panel') && !auth.currentUser) {
-                              next('/admin-login')
-                              return
-                        } else {
-                              next()
-                        }
-                  },
+                  // beforeEnter: async (to, from, next) => {
+                  //       if (to.path.includes('/admin-panel') && !auth.currentUser) {
+                  //             next('/admin-login')
+                  //             return
+                  //       } else {
+                  //             next()
+                  //       }
+                  // },
 
                   children: [
                         {
@@ -63,13 +80,12 @@ const router = createRouter({
                               path: 'manage-gallery',
                               name: 'manage gallery',
                               component: () => import('../views/AdminGalleryManageImgView.vue')
+                        },
+                        {
+                              path: 'add-post',
+                              name: 'add post',
+                              component: () => import('../views/AdminBlogView.vue')
                         }
-
-                        //   {
-                        //     path: 'blog',
-                        //     name: 'blog',
-                        //     component: () => import('../views/AdminPanelBlogView.vue')
-                        //   }
                   ]
             },
             {
@@ -79,19 +95,5 @@ const router = createRouter({
             }
       ]
 })
-
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/admin-login' && auth.currentUser) {
-//     next('/admin-panel')
-//     return
-//   }
-
-//   if (to.matched.some((record) => record.meta.requiresAuth) && !auth.currentUser) {
-//     next('/admin-login')
-//     return
-//   }
-
-//   next()
-// })
 
 export default router
