@@ -32,7 +32,7 @@ const { questionForm } = storeToRefs(contactStore)
                   </article>
                   <article class="contact__contact">
                         <p>+48 000 000 000</p>
-                        <p>koza-to-pala@zdecydowanie.com</p>
+                        <p>miniature-painting-studio@gmail.com</p>
                   </article>
             </section>
 
