@@ -12,7 +12,7 @@ const contactStore = useContactStore()
 const { questionForm } = storeToRefs(contactStore)
 </script>
 <template>
-      <section>
+      <section class="contact-container">
             <BannerEl />
 
             <section class="description">
@@ -74,7 +74,7 @@ const { questionForm } = storeToRefs(contactStore)
 </template>
 
 <style lang="scss" scoped>
-main {
+.contact-container {
       @include container;
 
       .description {
