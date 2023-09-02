@@ -68,47 +68,6 @@ onMounted(() => {
       textAnimation()
       imageAnimation()
 })
-
-// onMounted(() => {
-//       const textSplit = new SplitType(`#text-hero`, {
-//             types: 'lines, words, chars'
-//       })
-//       const fluffSplit = new SplitType(`#fluff-hero`, {
-//             types: 'lines, words, chars'
-//       })
-//       const headingSplit = new SplitType(`#heading-hero`, {
-//             types: 'lines, words, chars'
-//       })
-//       const tl = gsap.timeline()
-
-//       tl.from(headingSplit.chars, {
-//             delay: 0.3,
-//             stagger: 0.03,
-//             opacity: 0
-//       })
-//             .from(
-//                   fluffSplit.chars,
-//                   {
-//                         stagger: 0.02,
-//                         opacity: 0
-//                   },
-//                   '<-=0.1'
-//             )
-//             .from(
-//                   textSplit.chars,
-//                   {
-//                         stagger: 0.007,
-//                         opacity: -10
-//                   },
-//                   '-=0.8'
-//             )
-//             .from('#underline-hero', {
-//                   duration: 0.5,
-//                   opacity: 0,
-//                   y: 50,
-//                   zIndex: -1
-//             })
-// })
 </script>
 
 <template>
