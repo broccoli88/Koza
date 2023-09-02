@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { auth } from '../firebase/db'
+import { useLoginStore } from '../stores/LoginStore'
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,14 +58,18 @@ const router = createRouter({
             component: () => import('../views/AdminPanelView.vue'),
 
             meta: { requiresAuth: true },
-            // beforeEnter: async (to, from, next) => {
-            //       if (to.path.includes('/admin-panel') && !auth.currentUser) {
-            //             next('/admin-login')
-            //             return
-            //       } else {
-            //             next()
-            //       }
-            // },
+            beforeEnter: async (to, from, next) => {
+                const loginStore = useLoginStore()
+
+                if (to.path.includes('/admin-panel') && !auth.currentUser) {
+                    loginStore.clearInput()
+                    next('/admin-login')
+
+                    return
+                } else {
+                    next()
+                }
+            },
 
             children: [
                 {

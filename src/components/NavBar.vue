@@ -2,20 +2,16 @@
 import linksData from '../data/links.json'
 import LogoEl from '../template/LogoEl.vue'
 import FadeScaleIconTransition from '../utils/transitions/FadeScaleIconTransition.vue'
-import { ref, reactive, onMounted, watch, computed } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { auth } from '../firebase/db'
 
 const links = reactive(linksData.links)
 const header = ref()
+const adminPanelRef = ref()
 const navHeight = ref()
 const route = useRoute()
 
 const showDesktopAdminPanel = ref(true)
-
-const isUserLoggedIn = computed(() => {
-      return auth.currentUser
-})
 
 // Navbar toggle
 
@@ -73,10 +69,14 @@ onMounted(() => {
 
             const navObserver = new IntersectionObserver(
                   (entries) => {
-                        if (!header.value || header.value.classList === null) {
-                              return
-                        } else {
+                        if (!header.value || header.value.classList === null) return
+                        else {
                               header.value.classList.toggle('shrink', !entries[0].isIntersecting)
+                              if (adminPanelRef.value)
+                                    adminPanelRef.value.classList.toggle(
+                                          'shrink',
+                                          !entries[0].isIntersecting
+                                    )
                         }
                   },
                   { rootMargin: '30px 0px 0px 0px' }
@@ -116,13 +116,8 @@ onMounted(() => {
                                     >
                               </li>
                         </ul>
-                        <!-- <div v-if="showDesktopAdminPanel">
-                              <router-link
-                                    v-if="!isUserLoggedIn"
-                                    class="admin-panel"
-                                    ref="adminPanel"
-                                    to="/admin-panel"
-                              >
+                        <div class="admin-panel-btn" ref="adminPanelRef">
+                              <router-link class="admin-panel" ref="adminPanel" to="/admin-panel">
                                     <svg
                                           height="100%"
                                           stroke-miterlimit="10"
@@ -161,7 +156,7 @@ onMounted(() => {
                                     </svg>
                                     <p>Admin</p>
                               </router-link>
-                        </div> -->
+                        </div>
                   </nav>
             </div>
       </header>
@@ -184,11 +179,21 @@ header {
             align-items: center;
             padding-block: 1.5rem;
             margin-bottom: 0;
+            position: relative;
 
             transition: $transition-04;
 
             @include breakpoint {
                   padding: 1rem;
+            }
+
+            .admin-panel-btn {
+                  position: absolute;
+                  top: 100%;
+                  right: 0;
+                  background-color: $color-white;
+                  border-radius: 0 0 8px 8px;
+                  z-index: 999;
             }
 
             .logo {
@@ -283,7 +288,6 @@ header {
                         }
                   }
 
-                  .admin-panel,
                   .nav__link {
                         display: block;
                         padding: 0.4rem 2rem 0.1rem;
@@ -339,15 +343,16 @@ header {
                   }
 
                   .admin-panel {
-                        margin-left: 1.5em;
+                        padding-inline: 1.5rem;
                         display: flex;
                         align-items: center;
                         gap: 0.5rem;
+                        color: $color-black;
 
                         svg {
-                              width: clamp(1.8rem, 1rem + 1.9vw, 2.5rem);
-                              height: clamp(1.5rem, 1rem + 1vw, 2.5rem);
-                              align-self: baseline;
+                              width: clamp(1.5rem, 1rem + 1.9vw, 2rem);
+                              height: clamp(1.2rem, 1rem + 1vw, 2rem);
+                              margin-bottom: 0.5rem;
                         }
 
                         &:hover,
@@ -387,9 +392,23 @@ header {
                   transition: $transition-04;
             }
 
+            .admin-panel-btn,
             .nav__link {
                   @include breakpoint {
                         font-size: clamp(1rem, 1rem + 0.4vw, 1.7rem);
+                  }
+            }
+
+            .admin-panel-btn {
+                  box-shadow: none;
+                  .admin-panel {
+                        padding-inline: 1.2rem;
+
+                        svg {
+                              width: clamp(1.2rem, 1rem + 1.6vw, 1.7rem);
+                              height: clamp(1rem, 1rem + 0.8vw, 1.8rem);
+                              margin-bottom: 0.5rem;
+                        }
                   }
             }
       }

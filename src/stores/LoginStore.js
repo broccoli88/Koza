@@ -9,13 +9,14 @@ import {
     setPersistence,
     browserSessionPersistence
 } from 'firebase/auth'
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import router from '../router'
 
 export const useLoginStore = defineStore('loginStore', () => {
+
     // ...::: [LOGIN VALIDATION ] :::...
 
-    const loginState = reactive({
+    const loginState = ref({
         email: null,
         password: null,
         id: null
@@ -37,27 +38,29 @@ export const useLoginStore = defineStore('loginStore', () => {
         }
     }
 
-    const v = useVuelidate(rules, loginState)
+    const v = useVuelidate(rules, loginState.value)
+
+    const clearInput = () => {
+        loginState.value.email = ''
+        loginState.value.password = ''
+        v.value.$reset()
+    }
 
     async function logIn() {
         const isLoginCorrect = await v.value.$validate()
         if (!isLoginCorrect) return
 
-        const acc = {
-            user: 'testacc@test.com',
-            pass: 'test12'
-        }
 
         try {
-            // await setPersistence(auth, browserSessionPersistence)
-            await signInWithEmailAndPassword(auth, acc.user, acc.pass)
+            await setPersistence(auth, browserSessionPersistence)
+            await signInWithEmailAndPassword(auth, loginState.value.email, loginState.value.password)
 
             fetchUser()
 
             router.push('/admin-panel')
-            // loginState.email = ''
-            // loginState.password = ''
-            v.value.$reset()
+
+            clearInput()
+
         } catch (error) {
             switch (error.code) {
                 case 'auth/user-not-found':
@@ -77,8 +80,8 @@ export const useLoginStore = defineStore('loginStore', () => {
 
     async function logOut() {
         await signOut(auth)
-        loginState.email = null
-        loginState.password = null
+        loginState.value.email = null
+        loginState.value.password = null
         router.push('/')
     }
 
@@ -98,5 +101,5 @@ export const useLoginStore = defineStore('loginStore', () => {
         router.push('/')
     }
 
-    return { loginState, v, userData, logIn, logOut, goBack, fetchUser }
+    return { loginState, v, userData, logIn, logOut, goBack, fetchUser, clearInput }
 })
