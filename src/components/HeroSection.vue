@@ -4,9 +4,9 @@ import { gsap } from 'gsap'
 import SplitType from 'split-type'
 import { onMounted } from 'vue'
 
-onMounted(() => {
+const textAnimation = () => {
       const textSplit = new SplitType(`#text-hero`, {
-            types: 'lines, words, chars'
+            types: 'lines, words, chars '
       })
       const fluffSplit = new SplitType(`#fluff-hero`, {
             types: 'lines, words, chars'
@@ -30,10 +30,11 @@ onMounted(() => {
                   '<-=0.1'
             )
             .from(
-                  textSplit.chars,
+                  textSplit.words,
                   {
-                        stagger: 0.007,
-                        opacity: -10
+                        y: -20,
+                        stagger: 0.02,
+                        opacity: 0
                   },
                   '-=0.8'
             )
@@ -43,7 +44,71 @@ onMounted(() => {
                   y: 50,
                   zIndex: -1
             })
+}
+
+const imageAnimation = () => {
+      gsap.from('.bg-img-1', {
+            yPercent: -50,
+            opacity: 0,
+            duration: 1
+      })
+      gsap.from('.bg-img-2', {
+            yPercent: 50,
+            opacity: 0,
+            duration: 1
+      })
+      gsap.from('.bg-img-3', {
+            yPercent: -50,
+            opacity: 0,
+            duration: 1
+      })
+}
+
+onMounted(() => {
+      textAnimation()
+      imageAnimation()
 })
+
+// onMounted(() => {
+//       const textSplit = new SplitType(`#text-hero`, {
+//             types: 'lines, words, chars'
+//       })
+//       const fluffSplit = new SplitType(`#fluff-hero`, {
+//             types: 'lines, words, chars'
+//       })
+//       const headingSplit = new SplitType(`#heading-hero`, {
+//             types: 'lines, words, chars'
+//       })
+//       const tl = gsap.timeline()
+
+//       tl.from(headingSplit.chars, {
+//             delay: 0.3,
+//             stagger: 0.03,
+//             opacity: 0
+//       })
+//             .from(
+//                   fluffSplit.chars,
+//                   {
+//                         stagger: 0.02,
+//                         opacity: 0
+//                   },
+//                   '<-=0.1'
+//             )
+//             .from(
+//                   textSplit.chars,
+//                   {
+//                         stagger: 0.007,
+//                         opacity: -10
+//                   },
+//                   '-=0.8'
+//             )
+//             .from('#underline-hero', {
+//                   duration: 0.5,
+//                   opacity: 0,
+//                   y: 50,
+//                   zIndex: -1
+//             })
+// })
 </script>
 
 <template>
@@ -63,14 +128,6 @@ onMounted(() => {
                               ideas for wargaming miniatures into reality through unrivalled
                               service, excellent communication and dedication to your project.
                         </p>
-                        <!-- <div class="hero__btns">
-                              <ButtonEl class="btn--link btn--medium btn--gray btn--slide-black">
-                                    <router-link to="/contact">Ask for quote</router-link>
-                              </ButtonEl>
-                              <ButtonEl class="btn--link btn--medium btn--purple btn--slide-black">
-                                    <router-link to="/gallery"> Gallery </router-link>
-                              </ButtonEl>
-                        </div> -->
                   </div>
             </article>
             <div class="hero__bg">
