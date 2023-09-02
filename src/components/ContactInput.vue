@@ -42,4 +42,8 @@ defineEmits(['update:modelValue'])
             @include form-input;
       }
 }
+
+.error {
+      @include error;
+}
 </style>

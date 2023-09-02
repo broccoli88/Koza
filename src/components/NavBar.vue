@@ -192,8 +192,10 @@ header {
                   top: 100%;
                   right: 0;
                   background-color: $color-white;
-                  border-radius: 0 0 8px 8px;
+                  border-radius: 8px;
                   z-index: 999;
+
+                  border: 2px solid $color-black;
             }
 
             .logo {
@@ -343,16 +345,20 @@ header {
                   }
 
                   .admin-panel {
-                        padding-inline: 1.5rem;
+                        padding-inline: 1rem;
                         display: flex;
                         align-items: center;
                         gap: 0.5rem;
                         color: $color-black;
+                        font-size: 1.4rem;
+
+                        p {
+                              margin-top: 0.2rem;
+                        }
 
                         svg {
-                              width: clamp(1.5rem, 1rem + 1.9vw, 2rem);
-                              height: clamp(1.2rem, 1rem + 1vw, 2rem);
-                              margin-bottom: 0.5rem;
+                              width: 1.4rem;
+                              height: 1.4rem;
                         }
 
                         &:hover,
@@ -400,7 +406,9 @@ header {
             }
 
             .admin-panel-btn {
-                  box-shadow: none;
+                  box-shadow: 0 2px 2px $bs-c-black-04;
+                  border: none;
+                  border-radius: 0 0 8px 8px;
                   .admin-panel {
                         padding-inline: 1.2rem;
 

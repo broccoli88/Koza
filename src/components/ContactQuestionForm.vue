@@ -1,92 +1,59 @@
 <script setup>
+import ContactInput from './ContactInput.vue'
+import ContactTextArea from './ContactTextArea.vue'
 import ButtonEl from '../template/ButtonEl.vue'
 import { useContactStore } from '../stores/ContactStore'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
 
 const contactStore = useContactStore()
-const { questionState, v1 } = storeToRefs(contactStore)
-
-const inputData = ref({
-      firstName: { label: 'First Name', placeholder: 'Enter name...', id: 'name' },
-      lastName: { label: 'Last Name', placeholder: 'Enter last name...', id: 'last-name' },
-      email: { label: 'Email', placeholder: 'Enter email...', id: 'email' },
-      subject: { label: 'Subject', placeholder: 'Enter subject...', id: 'subject' },
-      message: { label: 'Message', placeholder: 'What is your question ugly human?', id: 'message' }
-})
+const { questionState, v1, inputData } = storeToRefs(contactStore)
 </script>
 
 <template>
       <form class="form" @submit.prevent="contactStore.handleQuestionForm">
-            <section class="form__section">
-                  <input
-                        class="form__input"
-                        type="text"
-                        id="name"
-                        placeholder="Enter name..."
-                        v-model="questionState.firstName"
-                        @blur="v1.firstName.$touch"
-                  />
-                  <label class="form__label" for="name">First Name:</label>
-                  <p class="error" v-if="v1.firstName.$error">
-                        {{ v1.firstName.$errors[0].$message }}
-                  </p>
-            </section>
+            <ContactInput
+                  type="text"
+                  :id="inputData.firstName.id"
+                  :label="inputData.firstName.label"
+                  :placeholder="inputData.firstName.placeholder"
+                  :v="v1.firstName"
+                  v-model="questionState.firstName"
+            />
 
-            <section class="form__section">
-                  <input
-                        class="form__input"
-                        type="text"
-                        id="last-name"
-                        placeholder="Enter last name..."
-                        v-model="questionState.lastName"
-                        @blur="v1.lastName.$touch"
-                  />
-                  <label class="form__label" for="last-name">Last Name:</label>
-                  <p class="error" v-if="v1.lastName.$error">
-                        {{ v1.lastName.$errors[0].$message }}
-                  </p>
-            </section>
+            <ContactInput
+                  type="text"
+                  :id="inputData.lastName.id"
+                  :label="inputData.lastName.label"
+                  :placeholder="inputData.lastName.placeholder"
+                  :v="v1.lastName"
+                  v-model="questionState.lastName"
+            />
 
-            <section class="form__section">
-                  <input
-                        class="form__input"
-                        type="text"
-                        id="email"
-                        placeholder="Enter email..."
-                        v-model="questionState.email"
-                        @blur="v1.email.$touch"
-                  />
-                  <label class="form__label" for="email">Email address:</label>
-                  <p class="error" v-if="v1.email.$error">{{ v1.email.$errors[0].$message }}</p>
-            </section>
+            <ContactInput
+                  type="email"
+                  :id="inputData.email.id"
+                  :label="inputData.email.label"
+                  :placeholder="inputData.email.placeholder"
+                  :v="v1.email"
+                  v-model="questionState.email"
+            />
 
-            <section class="form__section">
-                  <input
-                        class="form__input"
-                        type="text"
-                        id="subject"
-                        placeholder="Enter subject..."
-                        v-model="questionState.subject"
-                        @blur="v1.subject.$touch"
-                  />
-                  <label class="form__label" for="subject">Subject:</label>
-                  <p class="error" v-if="v1.subject.$error">{{ v1.subject.$errors[0].$message }}</p>
-            </section>
+            <ContactInput
+                  type="text"
+                  :id="inputData.subject.id"
+                  :label="inputData.subject.label"
+                  :placeholder="inputData.subject.placeholder"
+                  :v="v1.subject"
+                  v-model="questionState.subject"
+            />
 
-            <section class="form__section">
-                  <textarea
-                        class="form__input resize"
-                        type="text"
-                        id="message"
-                        placeholder="What is your question?"
-                        rows="10"
-                        v-model="questionState.message"
-                        @blur="v1.message.$touch"
-                  />
-                  <label class="form__label" for="message">Message:</label>
-                  <p class="error" v-if="v1.message.$error">{{ v1.message.$errors[0].$message }}</p>
-            </section>
+            <ContactTextArea
+                  :id="inputData.message.id"
+                  :label="inputData.message.label"
+                  :placeholder="inputData.message.placeholder"
+                  :v="v1.message"
+                  v-model="questionState.message"
+            />
             <ButtonEl class="form__btn btn--medium btn--outline-black btn--slide-black"
                   >Submit</ButtonEl
             >

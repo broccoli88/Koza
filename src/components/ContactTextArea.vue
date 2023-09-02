@@ -28,6 +28,7 @@ defineEmits(['update:modelValue'])
                   :value="modelValue"
                   v-bind="$attrs"
                   @input="$emit('update:modelValue', $event.target.value)"
+                  @blur="v.$touch"
                   class="form__input resize"
             />
             <label class="form__label" for="message">{{ label }}:</label>
